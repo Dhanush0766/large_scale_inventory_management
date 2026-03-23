@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fruit & Vegetable Insights</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: #f5fff7;
+      color: #2d2d2d;
+    }
+    header {
+      background: linear-gradient(90deg, #9be15d, #00e3ae);
+      padding: 20px;
+      text-align: center;
+      color: white;
+      font-size: 2em;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.03);
+    }
+    .card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
+    .card h3 {
+      margin-top: 15px;
+      font-size: 1.2em;
+    }
+    .card p {
+      font-size: 1em;
+      margin: 5px 0;
+    }
+    .metrics {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin-top: 30px;
+    }
+    .metric {
+      background: #eafff1;
+      border: 1px solid #b2eecb;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px;
+      flex: 1 1 200px;
+      text-align: center;
+    }
+    .metric h4 {
+      margin: 0 0 10px;
+      font-size: 1.1em;
+      color: #067d68;
+    }
+    footer {
+      background: #c4fdd2;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9em;
+      margin-top: 20px;
+    }
+    @media (max-width: 600px) {
+      header {
+        font-size: 1.5em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Fruit & Vegetable Market Insights
+  </header>
+
+  <section class="metrics">
+    <div class="metric">
+      <h4>Total Revenue</h4>
+      <p>$1.2M</p>
+    </div>
+    <div class="metric">
+      <h4>Top Seller</h4>
+      <p>Bananas</p>
+    </div>
+    <div class="metric">
+      <h4>Highest Growth</h4>
+      <p>Avocados +45%</p>
+    </div>
+    <div class="metric">
+      <h4>Returning Customers</h4>
+      <p>78%</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/766/766239.png" alt="Banana">
+      <h3>Banana</h3>
+      <p>Sales: $300k</p>
+      <p>Popular for energy boost</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/135/135620.png" alt="Tomato">
+      <h3>Tomato</h3>
+      <p>Sales: $180k</p>
+      <p>Widely used in cooking</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/135/135664.png" alt="Avocado">
+      <h3>Avocado</h3>
+      <p>Sales: $220k</p>
+      <p>Superfood, rising trend</p>
+    </div>
+    <div class="card">
+      <img src="https://cdn-icons-png.flaticon.com/512/135/135689.png" alt="Carrot">
+      <h3>Carrot</h3>
+      <p>Sales: $160k</p>
+      <p>Great for eyesight</p>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 SMD Markets Analytics | All rights reserved
+  </footer>
+</body>
+</html>

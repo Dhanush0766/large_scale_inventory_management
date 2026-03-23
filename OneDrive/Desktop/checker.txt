@@ -1,0 +1,46 @@
+const int stepX = 2;
+const int dirX  = 5;
+const int enX   = 8;
+
+const int stepY = 3;
+const int dirY  = 6;
+const int enY   = 9;
+
+void setup() {
+  pinMode(stepX, OUTPUT);
+  pinMode(dirX, OUTPUT);
+  pinMode(enX, OUTPUT);
+
+  pinMode(stepY, OUTPUT);
+  pinMode(dirY, OUTPUT);
+  pinMode(enY, OUTPUT);
+
+  // Enable both drivers
+  digitalWrite(enX, LOW);
+  digitalWrite(enY, LOW);
+}
+
+void loop() {
+  // Move X motor clockwise
+  digitalWrite(dirX, HIGH);
+  for (int i = 0; i < 800; i++) {
+    digitalWrite(stepX, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(stepX, LOW);
+    delayMicroseconds(1000);
+  }
+
+  delay(500); // small pause
+
+  // Move Y motor clockwise
+  digitalWrite(dirY, HIGH);
+  for (int i = 0; i < 800; i++) {
+    digitalWrite(stepY, HIGH);
+    delayMicroseconds(1000);
+    digitalWrite(stepY, LOW);
+    delayMicroseconds(1000);
+  }
+
+  delay(1000);
+}
+to run a steeper motor///

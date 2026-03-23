@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Interactive Course Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0eafc, #cfdef3);
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav {
+      background-color: #1f2937;
+      color: white;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 30px auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    input[type="text"], input[type="password"], select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #4f46e5;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #4338ca;
+    }
+
+    .courses {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      width: 180px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+      cursor: pointer;
+      transform-style: preserve-3d;
+      perspective: 1000px;
+    }
+
+    .card:hover {
+      transform: rotateY(10deg) scale(1.05);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.2);
+    }
+
+    .card.selected {
+      border: 2px solid #4f46e5;
+      background: #eef2ff;
+    }
+
+    .payment input {
+      margin: 10px 0;
+    }
+
+    .payment button {
+      background: #059669;
+    }
+
+    .payment button:hover {
+      background: #047857;
+    }
+
+    #payment-message {
+      text-align: center;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav">🌐 Interactive Course Portal</div>
+
+  <!-- Login Section -->
+  <div id="login-section" class="container">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button onclick="authenticate()">Login</button>
+    <p id="login-message" style="color: red;"></p>
+  </div>
+
+  <!-- Course Selection Section -->
+  <div id="course-section" class="container hidden">
+    <h2>Select a Course</h2>
+    <div class="courses">
+      <div class="card" onclick="selectCourse(this, 'HTML & CSS Basics')">HTML & CSS Basics</div>
+      <div class="card" onclick="selectCourse(this, 'JavaScript for Beginners')">JavaScript for Beginners</div>
+      <div class="card" onclick="selectCourse(this, 'Python Programming')">Python Programming</div>
+      <div class="card" onclick="selectCourse(this, 'Web Development Bootcamp')">Web Development Bootcamp</div>
+    </div>
+    <br>
+    <button onclick="goToPayment()">Proceed to Payment</button>
+  </div>
+
+  <!-- Payment Section -->
+  <div id="payment-section" class="container hidden">
+    <h2>Payment</h2>
+    <p id="selected-course-msg">Selected Course: <strong id="selected-course"></strong></p>
+
+    <h3>Select Payment Method:</h3>
+    <select id="payment-method" onchange="showPaymentForm()">
+      <option value="">-- Choose Method --</option>
+      <option value="upi">UPI</option>
+      <option value="netbanking">Netbanking</option>
+      <option value="card">Credit/Debit Card</option>
+    </select>
+
+    <div id="payment-forms" style="margin-top: 20px;">
+      <div id="upi-form" class="hidden">
+        <input type="text" id="upi-id" placeholder="Enter UPI ID (e.g. name@bank)">
+      </div>
+
+      <div id="netbanking-form" class="hidden">
+        <select id="bank-select">
+          <option value="">-- Select Bank --</option>
+          <option value="sbi">SBI</option>
+          <option value="hdfc">HDFC</option>
+          <option value="icici">ICICI</option>
+          <option value="axis">Axis Bank</option>
+        </select>
+      </div>
+
+      <div id="card-form" class="hidden">
+        <input type="text" placeholder="Card Number" /><br>
+        <input type="text" placeholder="Cardholder Name" /><br>
+        <input type="text" placeholder="MM/YY" style="width: 49%"/>
+        <input type="text" placeholder="CVV" style="width: 49%; float: right" />
+      </div>
+    </div>
+
+    <br>
+    <input type="text" id="paymentAmount" placeholder="Enter amount ($)">
+    <button onclick="pay()">Pay Now</button>
+
+    <p id="payment-message"></p>
+  </div>
+
+  <script>
+    let selectedCourse = "";
+
+    function authenticate() {
+      const user = document.getElementById("username").value;
+      const pass = document.getElementById("password").value;
+
+      if (user === "admin" && pass === "1234") {
+        document.getElementById("login-section").classList.add("hidden");
+        document.getElementById("course-section").classList.remove("hidden");
+      } else {
+        document.getElementById("login-message").textContent = "Invalid username or password.";
+      }
+    }
+
+    function selectCourse(element, courseName) {
+      document.querySelectorAll(".card").forEach(card => card.classList.remove("selected"));
+      element.classList.add("selected");
+      selectedCourse = courseName;
+    }
+
+    function goToPayment() {
+      if (!selectedCourse) {
+        alert("Please select a course before proceeding to payment.");
+        return;
+      }
+      document.getElementById("course-section").classList.add("hidden");
+      document.getElementById("payment-section").classList.remove("hidden");
+      document.getElementById("selected-course").textContent = selectedCourse;
+    }
+
+    function showPaymentForm() {
+      const method = document.getElementById("payment-method").value;
+      document.getElementById("upi-form").classList.add("hidden");
+      document.getElementById("netbanking-form").classList.add("hidden");
+      document.getElementById("card-form").classList.add("hidden");
+
+      if (method === "upi") {
+        document.getElementById("upi-form").classList.remove("hidden");
+      } else if (method === "netbanking") {
+        document.getElementById("netbanking-form").classList.remove("hidden");
+      } else if (method === "card") {
+        document.getElementById("card-form").classList.remove("hidden");
+      }
+    }
+
+    function pay() {
+      const amount = document.getElementById("paymentAmount").value;
+      const method = document.getElementById("payment-method").value;
+      const messageEl = document.getElementById("payment-message");
+
+      if (!method) {
+        messageEl.style.color = "red";
+        messageEl.textContent = "Please select a payment method.";
+        return;
+      }
+
+      if (!amount || isNaN(amount)) {
+        messageEl.style.color = "red";
+        messageEl.textContent = "Please enter a valid amount.";
+        return;
+      }
+
+      messageEl.style.color = "green";
+      messageEl.textContent = `Processing your $${amount} payment...`;
+
+      setTimeout(() => {
+        let redirectUrl = "";
+
+        if (method === "upi") {
+          redirectUrl = "https://pay.google.com/";
+        } else if (method === "netbanking") {
+          const bank = document.getElementById("bank-select").value;
+          if (!bank) {
+            messageEl.style.color = "red";
+            messageEl.textContent = "Please select a bank.";
+            return;
+          }
+          const bankLinks = {
+            sbi: "https://retail.onlinesbi.sbi/retail/login.htm",
+            hdfc: "https://netbanking.hdfcbank.com/netbanking/",
+            icici: "https://www.icicibank.com/netbanking/",
+            axis: "https://retail.axisbank.co.in/"
+          };
+          redirectUrl = bankLinks[bank];
+        } else if (method === "card") {
+          redirectUrl = "https://example.com/secure-payment";
+        }
+
+        window.location.href = redirectUrl;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
+

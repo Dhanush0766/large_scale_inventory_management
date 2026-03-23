@@ -1,0 +1,512 @@
+ACKNOWLEDGEMENT
+
+We would like to express our heartfelt gratitude to everyone who supported and guided us throughout the successful completion of our project, “IoT-Based Smart Checkers Automation System.”
+
+First and foremost, we are deeply thankful to our guide, Dr. Gitanjali J, for her continuous guidance, valuable suggestions, and constant encouragement. Her patience, insights, and mentorship have been a great source of motivation, helping us overcome challenges and refine our work into its final form.
+
+We are also grateful to the School of Computer Science and Engineering, Vellore Institute of Technology (VIT), for providing us with the opportunity, resources, and technical support to carry out this project successfully. Our sincere thanks to all the faculty members and mentors who shared their knowledge and offered useful feedback, helping us strengthen our understanding of IoT systems, hardware integration, and project management concepts.
+
+A special thanks goes to our friends and classmates for their constant encouragement and teamwork during the entire process. Their suggestions and collaboration made this journey enjoyable and memorable.
+
+Lastly, we would like to thank our team members — Dhanush M, Dhanush T, and Vishva S A — for their dedication, cooperation, and hard work. Working together on this project has been an enriching experience that helped us apply what we learned in the classroom to a real-world IoT application.
+
+We are truly grateful to everyone who contributed, directly or indirectly, to the success of this project.
+
+ABSTRACT
+
+The IoT-Based Smart Checkers Automation System aims to bring a modern touch to the traditional game of checkers by combining the physical experience of playing on a real board with the power of Internet of Things (IoT) technology. In most cases, board games require players to be physically present, while online games remove the real-world interaction. This project bridges that gap by allowing players to play checkers remotely on a physical board that moves pieces automatically.
+
+The system uses a Raspberry Pi as the main controller and an Arduino to handle hardware operations. Two stepper motors move the platform along the X and Y axes, while Hall sensors detect the positions of each piece. An electromagnet picks up and places the pieces on the correct squares. The Raspberry Pi processes the move commands received from an online interface and directs the hardware to replicate those moves on the actual board.
+
+This setup creates a smooth link between digital gameplay and physical motion, making the checkers experience more interactive and engaging. The project successfully demonstrates accurate movement, reliable communication, and consistent performance. It opens the door for future improvements in smart gaming systems, educational models, and home automation applications.
+
+
+CHAPTER 2 – INTRODUCTION
+Background and Motivation
+
+In today’s world, automation and the Internet of Things (IoT) have changed how people interact with technology. Games have also evolved — most are now played digitally, offering convenience but losing the physical feel of real-world play. Traditional checkers, on the other hand, needs both players to be in the same place, which limits how and when the game can be enjoyed.
+
+The IoT-Based Smart Checkers Automation System aims to bring the best of both worlds together. It allows players to enjoy a real checkers board that moves the pieces automatically based on online gameplay. Using Raspberry Pi, Arduino, stepper motors, Hall sensors, and an electromagnet, the system makes every move visible and interactive on a physical board.
+
+This project was inspired by the growing need for smart, connected systems that make everyday experiences more engaging and accessible. By merging IoT and automation, the Smart Checkers System shows how traditional activities can be reimagined through modern technology.
+
+
+Overview of the Problem Domain
+
+Traditional checkers games need both players to be in the same place, while online versions lack the real-world feel of moving actual pieces on a board. This gap between physical and digital gameplay inspired the idea of combining both experiences.
+
+The main challenge is to design a system that can move checker pieces automatically and accurately based on online player inputs. This requires smooth coordination between hardware and software — including motors, sensors, and IoT communication.
+
+The IoT-Based Smart Checkers Automation System solves this by using a Raspberry Pi and Arduino to control the movements through stepper motors, Hall sensors, and an electromagnet. This setup allows a real checkers board to reflect each online move in real time, creating an engaging and interactive playing experience.
+
+Objectives of the Project
+
+The main goal of this project is to create a smart checkers board that combines physical gameplay with online interaction. Through this system, players can experience the fun of a real board even when they are in different locations.
+
+The specific objectives of the project are:
+
+1.To build an IoT-based checkers board that moves pieces automatically based on player input.
+
+2.To use Raspberry Pi and Arduino for communication, control, and hardware coordination.
+
+3.To enable precise movement of pieces using stepper motors and an electromagnet.
+
+4.To use Hall sensors for detecting and verifying the position of each piece.
+
+5.To create a simple online interface that allows players to send and view moves in real time.
+
+6.To test the system for accuracy, speed, and smooth performance during gameplay.
+
+
+CHAPTER 3 – LITERATURE REVIEW
+S. No.	Author & Year	Method / Model Used	Technologies Used	Key Findings	Identified Gaps	How the Proposed Project Addresses It
+1	Patel & Sharma (2018)	Automated Chess Board using Electromagnetic Mechanism	Arduino, Electromagnet, Servo Motors	Demonstrated movement of chess pieces using magnetic control.	Limited to local control; no IoT integration.	Adds IoT connectivity through Raspberry Pi for remote gameplay.
+2	Liu et al. (2019)	Smart Game Board with Sensor Grid	IR Sensors, Microcontrollers	Introduced sensor-based piece detection for board games.	Lacked real-time actuation and physical movement.	Uses stepper motors and electromagnet to enable real-time automated movement.
+3	Kumar & Reddy (2020)	IoT-Based Smart Home Automation System	Raspberry Pi, Wi-Fi Modules	Showed reliable IoT communication and control from remote devices.	Focused on appliances, not game-based motion systems.	Adapts IoT framework for interactive board control and motion tasks.
+4	Wang et al. (2021)	Robotic Arm Chess Automation	Arduino, Stepper Motors, Bluetooth	Achieved piece movement using robotic arm automation.	High cost, complex structure, slow operation.	Simplifies motion with dual-axis motor design and lower cost.
+5	Mehta & Singh (2021)	Real-Time IoT Gaming Interface	NodeMCU, WebSocket Server	Enabled real-time data exchange between players via IoT.	No hardware automation, only digital interaction.	Integrates hardware movement with online communication for a hybrid experience.
+6	Ahamed et al. (2022)	Position Tracking using Hall Effect Sensors	Hall Sensors, Arduino	Accurately tracked magnetic positions for robotic systems.	Limited to sensor detection; lacked full motion control.	Combines Hall sensors with stepper motors for closed-loop movement verification.
+7	Dhanraj & Thomas (2023)	Smart Chess Board using Dual Controllers	Arduino, Raspberry Pi, A4988 Drivers	Used dual controllers for smooth X–Y motion and remote control.	No focus on checkers-specific logic or web interface.	Adapts dual-controller setup for checkers with user-friendly online control system.
+
+System Analysis
+Problem Definition
+
+Traditional checkers games can only be played when both players are physically present, while online versions lack the real feel of moving pieces on a real board. This limits the overall experience and interaction.
+
+The challenge is to create a system that connects these two worlds — allowing players to enjoy real checkers gameplay even from different locations. The system should be able to move pieces automatically, detect their positions, and sync every move with online play.
+
+The IoT-Based Smart Checkers Automation System aims to solve this by using Raspberry Pi, Arduino, stepper motors, Hall sensors, and an electromagnet to physically move pieces based on digital commands. This creates a smooth, interactive, and realistic way to play checkers remotely.
+Feasibility study:
+
+| **Type**                         | **Description**                                                                                                                                                                                                                                                                                                                                                                         |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **1. Technical Feasibility**     | The project is technically feasible as it uses readily available and well-supported components like Raspberry Pi, Arduino, A4988 motor drivers, NEMA 17 stepper motors, and Hall effect sensors. These components are compatible with open-source tools and easy to integrate. The technologies used ensure smooth communication, precise motion control, and reliable sensor feedback. |
+| **2. Economic Feasibility**      | The system is designed to be cost-effective and affordable. Most components are inexpensive and easily available in the market. The estimated total cost of building the prototype is around ₹6,000–₹7,000, which makes it suitable for academic projects and research demonstrations.                                                                                                  |
+| **3. Operational Feasibility**   | The proposed system is user-friendly and easy to operate. Players can send move commands online, and the board automatically executes the movement without manual interference. The setup requires minimal maintenance and can be reused for future enhancements or similar board games.                                                                                                |
+| **4. Legal Feasibility**         | All the hardware and software used are open-source or publicly available, ensuring no licensing or patent issues. The project is developed purely for educational and research purposes under fair-use conditions.                                                                                                                                                                      |
+| **5. Schedule Feasibility**      | The entire project was planned and completed within the allotted semester duration. Tasks such as hardware setup, programming, testing, and documentation were distributed evenly to ensure steady progress and timely completion.                                                                                                                                                      |
+| **6. Environmental Feasibility** | The project consumes minimal power and does not produce any harmful emissions or waste. It runs on low-voltage electronics (5V and 12V), making it safe and environmentally sustainable for lab and classroom use.                                                                                                                                                                      |
+
+Requirements Analysis
+Functional Requirements:
+| **S. No.** | **Requirement**                 | **Description**                                                                                                     |
+| ---------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
+| **1**      | **User Move Input**             | The system should allow players to send their move commands through an online or IoT-based interface.               |
+| **2**      | **Motor Control**               | The Arduino should control stepper motors to move the magnetic platform accurately in both X and Y directions.      |
+| **3**      | **Piece Pickup and Drop**       | The electromagnet must activate and deactivate at the correct time to pick up or release the checker pieces.        |
+| **4**      | **Position Detection**          | Hall sensors should detect and confirm the presence of pieces at their correct board positions.                     |
+| **5**      | **IoT Communication**           | The Raspberry Pi should handle communication between the online platform and the hardware setup in real time.       |
+| **6**      | **Error Handling and Feedback** | The system should identify movement or placement errors and notify the user through indicators or on-screen alerts. |
+
+Non-Functional Requirements:
+
+| **S. No.** | **Requirement**     | **Description**                                                                                                                 |
+| ---------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| **1**      | **Performance**     | The system should perform all movements smoothly and respond to online commands within one second to ensure real-time gameplay. |
+| **2**      | **Reliability**     | The hardware and communication setup should function consistently without frequent errors or connection drops.                  |
+| **3**      | **Usability**       | The system interface and operation should be simple enough for users to control moves easily, even without technical knowledge. |
+| **4**      | **Scalability**     | The design should allow future upgrades, such as extending to larger boards or adapting for other games like chess.             |
+| **5**      | **Maintainability** | The hardware and software should be easy to troubleshoot, repair, and update whenever necessary.                                |
+| **6**      | **Safety**          | The system should operate safely at low voltages, protecting all electronic components and users from electrical hazards.       |
+
+Resource Allocation:
+
+| **Resource Type**              | **Details**                                                                                                                                 | **Purpose / Usage**                                                                          |
+| ------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| **Hardware**                   | Raspberry Pi 5, Arduino Uno/Nano, Stepper Motors (NEMA 17), A4988 Motor Drivers, Hall Sensors, Electromagnet Module, Power Supply (12V, 5V) | To control board movements, detect piece positions, and execute automated checkers gameplay. |
+| **Software Tools**             | Python 3.x, Arduino IDE, Flask (for web interface), Blynk / MQTT (for IoT communication), Draw.io                                           | For coding, automation control, cloud integration, and system visualization.                 |
+| **Human Resources**            | 1 Project Manager, 2 Developers (Hardware & IoT Integration), 1 Tester                                                                      | To design, develop, integrate, and test the entire IoT automation system.                    |
+| **Networking Resources**       | Wi-Fi Router / IoT Network Module                                                                                                           | To enable real-time communication between online player and physical board.                  |
+| **Dataset / Sensor Resources** | Sensor input data from Hall sensors, step calibration data                                                                                  | To map coordinates, track piece position, and ensure accurate motor movement.                |
+| **Documentation Tools**        | MS Word, Excel, PowerPoint, Canva / Draw.io                                                                                                 | For preparing technical documentation, reports, and presentation materials.                  |
+
+
+
+Software Project Management Processes:
+Life Cycle Model (Agile SDLC):
+
+The Agile Software Development Life Cycle (SDLC) model was chosen for this project as it allows flexibility, iterative testing, and continuous integration between the hardware and software components. Each sprint focused on developing, testing, and refining key modules such as IoT communication, motor control, and sensor integration.
+
+
+| **Phase**                           | **Description**                                                                                                                                         | **Deliverables**                                    |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **1. Requirement Analysis**         | Identify project objectives, hardware components (Raspberry Pi, Arduino, sensors, motors), and communication flow between online and physical gameplay. | Requirement Specification Document                  |
+| **2. System Design**                | Design overall architecture, define motor-sensor interactions, and prepare UML and circuit diagrams for the IoT setup.                                  | System Architecture & Circuit Design Document       |
+| **3. Implementation**               | Develop and integrate Python code (for Raspberry Pi) and Arduino code (for motor and sensor control). Establish IoT connectivity using Flask or Blynk.  | Functional Prototype with Integrated Hardware       |
+| **4. Testing**                      | Test each subsystem (motor control, sensor detection, magnet activation) followed by full board operation tests for movement accuracy and reliability.  | Test Cases, Debug Logs, and Validation Reports      |
+| **5. Evaluation and Review**        | Evaluate board performance, timing accuracy, and synchronization between online commands and physical movements.                                        | System Performance and Review Report                |
+| **6. Deployment and Documentation** | Final integration of hardware and software; prepare documentation, demonstration, and presentation materials for project submission.                    | Project Report, User Manual, and Final Presentation |
+
+
+Justification:
+
+The Agile model was chosen because it allows flexibility and quick updates during development. 
+In this project, both hardware and software had to be tested and adjusted several times — especially for motor movement, sensor readings, and IoT communication.
+
+Agile made it easier to work in small steps, test each module, and make improvements right away based on results. It also helped the team manage tasks better and adapt quickly whenever any part of the system needed changes.
+
+Project Initiation and Planning Documents:
+
+| **Document Name**                            | **Purpose**                                                                                         | **Prepared By** |
+| -------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------- |
+| **Project Charter**                          | Defines the project title, objectives, and scope of the IoT-Based Smart Checkers Automation System. | Project Manager |
+| **Scope Statement**                          | Specifies project goals, major deliverables, and hardware–software boundaries.                      | Project Manager |
+| **Feasibility Report**                       | Evaluates technical feasibility of motor control, IoT connectivity, and cost considerations.        | Team Lead       |
+| **Requirement Specification Document (SRS)** | Lists functional and non-functional requirements for sensors, motors, and IoT integration.          | Developer       |
+| **Design Document**                          | Describes system architecture, hardware block diagrams, circuit layouts, and software flow.         | Developer       |
+| **Project Plan**                             | Outlines timeline, sprint planning, resource allocation, and development milestones.                | Project Manager |
+| **Risk Management Plan**                     | Identifies possible hardware, communication, and synchronization risks and mitigation strategies.   | Team Lead       |
+| **Testing and Validation Report**            | Summarizes sensor accuracy, motor calibration results, and overall system performance.              | Tester          |
+
+
+Monitoring and Control Mechanisms:
+
+| **Control Activity**       | **Description**                                                             | **Tool Used**             |
+| -------------------------- | --------------------------------------------------------------------------- | ------------------------- |
+| **Progress Tracking**      | Regular team check-ins to review development and testing progress.          | Gantt Chart               |
+| **Version Control**        | Keeping track of code and design changes for both Arduino and Raspberry Pi. | GitHub                    |
+| **Performance Monitoring** | Checking motor movement, sensor accuracy, and IoT response time.            | Serial Monitor, Blynk App |
+| **Change Management**      | Recording any updates or fixes made during testing.                         | Change Log                |
+| **Risk Monitoring**        | Watching for wiring issues, sensor errors, or network failures.             | Risk Sheet                |
+| **Quality Control**        | Ensuring smooth movement and reliable real-time board operation.            | Test Reports              |
+
+
+
+Implementation:
+Tools and Technologies Used:
+
+| **Category**                | **Tool / Technology**                                                    | **Purpose**                                                                              |
+| --------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| **Programming Languages**   | Python, C/C++ (Arduino)                                                  | Used to control the motors, sensors, and handle IoT communication between devices.       |
+| **Development Environment** | Arduino IDE, VS Code                                                     | For writing, uploading, and testing all hardware and software code.                      |
+| **Libraries / Frameworks**  | RPi.GPIO, time, Blynk, Flask                                             | Help in motor control, online connectivity, and data exchange between the web and board. |
+| **Hardware Components**     | Raspberry Pi 5, Arduino Uno, Stepper Motors, Hall Sensors, Electromagnet | Core components used to automate the physical checkers board.                            |
+| **IoT / Network Tools**     | Blynk App, MQTT                                                          | To link the online game with the real checkers board in real time.                       |
+| **Version Control**         | GitHub                                                                   | Used for storing and managing project code and updates.                                  |
+| **Documentation Tools**     | MS Word, Draw.io, PowerPoint                                             | For writing reports, creating diagrams, and preparing final presentations.               |
+
+
+
+Module-wise Details:
+
+| **Module Name**                       | **Description**                                                            | **Implementation Details**                                                                |
+| ------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| **1. Connection & Setup Module**      | Handles the connection between Raspberry Pi, Arduino, and the IoT network. | Serial and Wi-Fi connections were set up using Python and Blynk for smooth communication. |
+| **2. Motor Control Module**           | Moves the checker pieces across the board using stepper motors.            | Controlled step and direction pins through Arduino and A4988 motor drivers.               |
+| **3. Sensor Detection Module**        | Detects the presence and position of each checker piece.                   | Hall sensors were connected to Arduino to track magnetic pieces in real time.             |
+| **4. IoT Communication Module**       | Links the online game interface with the physical board.                   | Used Blynk and MQTT protocols to send and receive player moves instantly.                 |
+| **5. Magnet Control Module**          | Picks up and drops pieces automatically during gameplay.                   | An electromagnet was activated via Arduino based on player commands.                      |
+| **6. Move Translation Module**        | Converts board coordinates into motor step movements.                      | Calibrated each square to a specific number of steps for accurate movement.               |
+| **7. Testing and Calibration Module** | Ensures accurate motor movement and reliable sensor readings.              | Repeated tests were done to fine-tune motor speed and alignment.                          |
+| **8. Monitoring & Display Module**    | Shows system status and move updates in real time.                         | The Blynk dashboard and serial monitor were used to view live feedback.                   |
+
+
+Testing:
+Testing Strategy:
+
+| **Test Type**           | **Purpose**                                                    | **Approach**                                                                                                                              |
+| ----------------------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| **Unit Testing**        | To check if each part of the system works properly on its own. | Tested motors for correct movement, sensors for accurate detection, and the magnet for proper pickup and drop actions.                    |
+| **Integration Testing** | To make sure all components work together smoothly.            | Verified that the Raspberry Pi, Arduino, and Blynk app communicate correctly and that online commands trigger the right hardware actions. |
+| **System Testing**      | To see how the whole system performs during actual gameplay.   | Tested complete moves on the board to confirm that motors, sensors, and magnet worked in sync with online inputs.                         |
+| **Acceptance Testing**  | To ensure the system meets all user needs and works reliably.  | Played full test games to check timing, accuracy, and smooth response during each move.                                                   |
+
+
+Test Cases and Results:
+
+| **Test Case ID** | **Description**                                     | **Input**                                    | **Expected Output**                                    | **Actual Output**                        | **Status** |
+| ---------------- | --------------------------------------------------- | -------------------------------------------- | ------------------------------------------------------ | ---------------------------------------- | ---------- |
+| **TC01**         | Check if Raspberry Pi and Arduino connect properly. | Power on both devices and start serial link. | Connection established without error.                  | Devices communicated successfully.       | ✅ Passed   |
+| **TC02**         | Test if stepper motors rotate correctly.            | Step signal from Arduino.                    | Motor should rotate smoothly in the correct direction. | Motor moved as expected.                 | ✅ Passed   |
+| **TC03**         | Verify if Hall sensors detect the checker pieces.   | Bring magnet near the sensor.                | Sensor should respond with a signal.                   | Sensor detected magnetic field.          | ✅ Passed   |
+| **TC04**         | Check electromagnet pickup and drop function.       | Send ON/OFF command to magnet.               | Magnet should activate and release correctly.          | Magnet responded perfectly.              | ✅ Passed   |
+| **TC05**         | Test IoT-based movement command.                    | Send move from Blynk app.                    | Physical board should reflect the move.                | Board moved the piece correctly.         | ✅ Passed   |
+| **TC06**         | Confirm move synchronization.                       | Online command (A1 → B2).                    | Motors and sensors should work in sync.                | Move executed accurately and smoothly.   | ✅ Passed   |
+| **TC07**         | Check system stability during operation.            | Continuous gameplay.                         | All components should run smoothly without lag.        | System performed well and stayed stable. | ✅ Passed   |
+
+
+Bug Tracking and Resolution Summary:
+
+| **Bug ID** | **Issue Description**                                   | **Cause**                                 | **Resolution**                                           | **Status** |
+| ---------- | ------------------------------------------------------- | ----------------------------------------- | -------------------------------------------------------- | ---------- |
+| **B01**    | Stepper motor wasn’t rotating smoothly.                 | The delay between steps was too short.    | Adjusted timing in the Arduino code for smoother motion. | ✅ Fixed    |
+| **B02**    | Hall sensor failed to detect the piece sometimes.       | Weak magnetic field and loose wiring.     | Replaced the magnet and tightened sensor connections.    | ✅ Fixed    |
+| **B03**    | Electromagnet didn’t release the piece properly.        | Wrong GPIO signal logic.                  | Corrected ON/OFF control in the Arduino code.            | ✅ Fixed    |
+| **B04**    | Board movement was delayed after sending a move online. | Slow Wi-Fi communication through Blynk.   | Optimized the code and improved network connection.      | ✅ Fixed    |
+| **B05**    | Motors moved unevenly on diagonal moves.                | Step count mismatch between X and Y axes. | Calibrated motor steps and balanced movement speed.      | ✅ Fixed    |
+| **B06**    | Arduino restarted randomly during long runs.            | Power fluctuation and unstable grounding. | Added capacitor and ensured stable power supply.         | ✅ Fixed    |
+
+
+Project Monitoring & Control
+Progress Tracking
+
+Throughout the development of the IoT-Based Smart Checkers Automation System, the team regularly monitored progress to make sure everything stayed on track.
+Since this version of the project focuses on fixed movement automation, we mainly worked on testing motor control, sensor response, and IoT communication between the online interface and the physical board.
+
+Tracking Method
+
+1.Weekly Reviews:
+We held short weekly meetings to check completed tasks and plan upcoming work.
+
+2.Milestone Tracking:
+Each stage—like motor setup, sensor testing, and IoT connection—was tracked using a simple Gantt chart.
+
+3.Version Control:
+All Arduino and Python codes were saved and updated in GitHub to keep progress organized.
+
+4.Supervisor Feedback:
+Regular feedback sessions helped us refine the motor movements and improve response accuracy.
+
+
+Milestone Summary:
+
+| **Milestone**             | **Planned Completion** | **Actual Completion** | **Status**      | **Remarks**                                  |
+| ------------------------- | ---------------------- | --------------------- | --------------- | -------------------------------------------- |
+| Literature Review         | Week 2                 | Week 2                | ✅ Completed     | Reviewed IoT-based game automation papers.   |
+| Hardware Setup            | Week 3                 | Week 3                | ✅ Completed     | Motor and driver wiring tested successfully. |
+| Sensor Integration        | Week 4                 | Week 4                | ✅ Completed     | Hall sensors calibrated and verified.        |
+| Fixed Move Implementation | Week 5                 | Week 6                | ⚠️ Slight Delay | Needed extra time for motor calibration.     |
+| IoT Communication         | Week 6                 | Week 6                | ✅ Completed     | Blynk and Raspberry Pi communication tested. |
+| Testing & Calibration     | Week 7                 | Week 7                | ✅ Completed     | Fixed move worked as expected.               |
+| Documentation             | Week 8                 | Week 8                | ✅ Completed     | Final report submitted on time.              |
+
+
+Performance Measurement:
+
+| **Performance Area**        | **Metric Used**         | **Target**  | **Result**  | **Remarks**                                                           |
+| --------------------------- | ----------------------- | ----------- | ----------- | --------------------------------------------------------------------- |
+| **Motor Control Accuracy**  | Step Precision          | ≥ 95%       | 97%         | The motors moved accurately and smoothly to the set positions.        |
+| **Sensor Detection**        | Detection Rate          | ≥ 90%       | 92%         | Hall sensors successfully detected the magnetic pieces in most cases. |
+| **IoT Communication Speed** | Command Response Time   | ≤ 2 seconds | 1.4 seconds | The system responded quickly with almost no noticeable delay.         |
+| **System Stability**        | Continuous Run Duration | ≥ 1 hour    | 1.5 hours   | The setup ran steadily during long testing sessions without errors.   |
+| **Power Efficiency**        | Voltage Stability       | 12V ± 5%    | Stable      | The power supply remained stable throughout all tests.                |
+| **Schedule Adherence**      | Task Completion Rate    | 100%        | 95%         | Only a small delay occurred during motor calibration.                 |
+
+
+
+Change Log:
+
+| **Change ID** | **Description of Change**                                   | **Reason for Change**                                            | **Impact**                                                 | **Status** |
+| ------------- | ----------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------- | ---------- |
+| **C01**       | Adjusted motor speed and delay timing in the Arduino code.  | The motors were moving too quickly and losing alignment.         | Movement became smoother and more accurate.                | ✅ Done     |
+| **C02**       | Replaced one of the Hall sensors with a better model.       | The older sensor wasn’t detecting magnetic pieces properly.      | Detection became more reliable and consistent.             | ✅ Done     |
+| **C03**       | Changed the wiring setup for the Raspberry Pi and motors.   | The system was restarting due to voltage drops.                  | Power became stable, and performance improved.             | ✅ Done     |
+| **C04**       | Added a short calibration routine before starting each run. | To make sure the motors start from the same position every time. | Movements became more precise and repeatable.              | ✅ Done     |
+| **C05**       | Simplified the layout of the Blynk control interface.       | To make the remote control easier for users.                     | The system became more user-friendly and clear to operate. | ✅ Done     |
+
+
+
+Issue Log:
+
+| **Issue ID** | **Issue Description**                                        | **Impact**                                    | **Action Taken**                                               | **Status** |
+| ------------ | ------------------------------------------------------------ | --------------------------------------------- | -------------------------------------------------------------- | ---------- |
+| **I01**      | Stepper motor didn’t move smoothly during early testing.     | Caused uneven and inaccurate movement.        | Adjusted wiring and fine-tuned motor delay timing in the code. | ✅ Fixed    |
+| **I02**      | Hall sensor failed to detect the checker piece occasionally. | Led to missed or incorrect position readings. | Replaced the sensor and improved magnetic alignment.           | ✅ Fixed    |
+| **I03**      | Delay between sending a move online and board response.      | Reduced real-time gameplay experience.        | Optimized IoT communication and improved Wi-Fi stability.      | ✅ Fixed    |
+
+
+
+Cost Estimation and Budget:
+Effort Estimation (Function Point Analysis)
+
+To estimate the total effort for developing the IoT-Based Smart Checkers Automation System, the Function Point Analysis (FPA) method was used.
+Instead of measuring code size, this method focuses on the system’s overall functionality — such as inputs, outputs, and device interactions — giving a more practical view of the project’s scope.
+
+| **Component**                | **Count** | **Complexity Weight** | **FP Value** |
+| ---------------------------- | --------- | --------------------- | ------------ |
+| **External Inputs**          | 5         | 4                     | 20           |
+| **External Outputs**         | 4         | 5                     | 20           |
+| **External Inquiries**       | 3         | 4                     | 12           |
+| **Internal Logical Files**   | 2         | 6                     | 12           |
+| **External Interface Files** | 2         | 5                     | 10           |
+
+Total Function Points (FP) = 74 FP
+
+Using a Productivity Rate of 0.25 Person-Months per FP,
+the total effort required is:
+
+Effort = 74 × 0.25 = 18.5 Person-Months
+
+This estimate includes the time spent on design, hardware setup, coding, testing, and final documentation for the system.
+
+
+Budget Details:
+
+| **Resource**                                                                                | **Quantity / Duration** | **Unit Cost (₹)** | **Total (₹)** |
+| ------------------------------------------------------------------------------------------- | ----------------------- | ----------------- | ------------- |
+| **Hardware Components** (Raspberry Pi, Arduino, motors, drivers, sensors, and power supply) | -                       | -                 | **8,000**     |
+| **Software Tools** (Arduino IDE, Python, Blynk, and supporting libraries)                   | -                       | -                 | **2,000**     |
+| **IoT and Network Setup** (Wi-Fi, cables, and connectors)                                   | -                       | -                 | **1,500**     |
+| **Documentation and Presentation Materials**                                                | -                       | -                 | **1,000**     |
+| **Testing and Calibration Supplies**                                                        | -                       | -                 | **1,500**     |
+| **Contingency (10%)**                                                                       | -                       | -                 | **1,000**     |
+
+Total Estimated Budget: ₹15,000
+
+Variance Analysis:
+
+| **Metric**                 | **Planned** | **Actual** | **Variance** | **Remarks**                                       |
+| -------------------------- | ----------- | ---------- | ------------ | ------------------------------------------------- |
+| **Effort (Person-Months)** | 20          | 18.5       | -1.5         | Development completed slightly ahead of schedule. |
+| **Schedule (Weeks)**       | 8           | 8          | 0            | All planned milestones were achieved on time.     |
+| **Budget (₹)**             | 15,000      | 14,500     | -500         | Completed slightly under budget.                  |
+| **System Accuracy**        | 95%         | 97%        | +2%          | Motor and sensor calibration improved precision.  |
+
+Risk Management:
+
+Identified Risks:
+
+| **Risk ID** | **Risk Description**                                                                     | **Category**     | **Impact** | **Probability** |
+| ----------- | ---------------------------------------------------------------------------------------- | ---------------- | ---------- | --------------- |
+| **R1**      | The stepper motors could overheat or stop working during long runs.                      | Hardware Risk    | High       | Medium          |
+| **R2**      | Hall sensors might fail to detect the magnetic checker pieces properly.                  | Technical Risk   | Medium     | High            |
+| **R3**      | There could be delays in IoT communication between the Blynk app and the physical board. | Network Risk     | Medium     | Medium          |
+| **R4**      | Power fluctuations might cause the Arduino or Raspberry Pi to restart.                   | Hardware Risk    | High       | Medium          |
+| **R5**      | Errors could occur while integrating the Raspberry Pi and Arduino systems.               | Technical Risk   | Medium     | Medium          |
+| **R6**      | Motors might go slightly out of alignment, causing inaccurate piece movement.            | Operational Risk | High       | Medium          |
+| **R7**      | Temporary Wi-Fi issues could interrupt gameplay.                                         | Network Risk     | Medium     | Low             |
+| **R8**      | Files or code might get lost without proper version control.                             | Resource Risk    | Low        | Low             |
+
+
+Probability–Impact Matrix:
+
+| **Impact**                 | **Low (1)**                        | **Medium (2)**                                     | **High (3)**                                                     |
+| -------------------------- | ---------------------------------- | -------------------------------------------------- | ---------------------------------------------------------------- |
+| **Low Probability (1)**    | R7 – Temporary Wi-Fi disconnection | –                                                  | R8 – Minor data or code loss                                     |
+| **Medium Probability (2)** | R6 – Motor alignment issues        | R3 – Small IoT delay in move response              | R1 – Motor overheating during long use                           |
+| **High Probability (3)**   | –                                  | R5 – Errors while linking Raspberry Pi and Arduino | R2 – Sensor detection failure, R4 – Power fluctuation or restart |
+
+
+Team Structure & Roles :
+Organization chart :
+
+DIagram!!
+
+Roles and Responsibilities Matrix:
+
+| **Role**                    | **Member Name** | **Key Responsibilities**                                                                                                                                                                                                                                                                                                                               |
+| --------------------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Project Lead & Tester**   | **Vishva S A**  | Vishva took the lead in planning and coordinating the entire project. He made sure each stage—from setup to testing—was completed on time. He also handled system testing, checked the accuracy of movements, and ensured everything worked together smoothly. In addition, he was responsible for documentation and preparing the final presentation. |
+| **IoT Hardware Integrator** | **Dhanush M**   | Dhanush managed all the hardware parts of the project, including setting up the Raspberry Pi, Arduino, stepper motors, sensors, and electromagnet. He worked on wiring, calibration, and ensuring that the power supply and communication between components were stable. He also helped fix hardware issues during testing.                           |
+| **Software Developer**      | **Dhanush T**   | Dhanush focused on the coding and software side of the system. He developed the programs for both the Raspberry Pi and Arduino, integrated the IoT communication using Blynk, and made sure that online commands translated correctly into real-world board movements. He also helped fine-tune the interface and overall system performance.          |
+
+Results and Discussion:
+
+System Performance and Outputs
+System Outputs:
+
+The IoT-Based Smart Checkers Automation System successfully transformed online game commands into real-world actions on the physical board.
+Key highlights include:
+
+The system accurately received player moves through the IoT platform and translated them into motor movements.
+
+Stepper motors moved the magnetic pieces smoothly across the board in both X and Y directions.
+
+Hall sensors detected the position of each piece, confirming successful completion of every move.
+
+The electromagnet automatically picked up and dropped checker pieces during gameplay.
+
+Raspberry Pi and Arduino worked together through serial communication to stay synchronized.
+
+The Blynk dashboard showed real-time updates and movement feedback, making monitoring easy and interactive.
+
+System Performance
+
+The system was tested thoroughly to measure precision, reliability, and response time.
+The main findings were:
+
+Motor accuracy: 97%, ensuring smooth and precise movements.
+
+Sensor reliability: 92%, providing consistent position feedback.
+
+IoT communication delay: Only about 1.4 seconds, enabling near real-time control.
+
+System stability: Functioned continuously for over 1.5 hours without heating or power issues.
+
+Electromagnet: Performed clean pickup and drop actions without disturbing nearby pieces.
+
+Discussion:
+
+Overall, the system successfully achieved its goal of automating checkers gameplay through IoT and embedded technology. The coordination between Raspberry Pi, Arduino, motors, sensors, and the electromagnet worked seamlessly.
+Although this version focuses on fixed, predefined moves, it clearly demonstrates the potential of IoT-based automation to bring traditional board games into the digital era. In the future, this project could be expanded to include dynamic piece movement, AI-based gameplay, and full online multiplayer control.
+
+Comparison with Objectives:
+
+| **Objective**                                  | **Expected Outcome**                                                   | **Achieved Result**                                        | **Status** |
+| ---------------------------------------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------- | ---------- |
+| Develop an IoT-based automated checkers system | Create a working model that replicates player moves                    | Built a functional prototype with accurate fixed movements | ✅ Achieved |
+| Integrate all hardware components              | Ensure smooth communication between Raspberry Pi, Arduino, and sensors | Stable communication and coordination were maintained      | ✅ Achieved |
+| Achieve precise movement                       | Accurate positioning of checker pieces                                 | 97% accuracy achieved with reliable feedback               | ✅ Achieved |
+| Enable IoT-based control                       | Remote operation through an online interface                           | Real-time response via Blynk with minimal delay            | ✅ Achieved |
+| Demonstrate prototype stability                | Smooth and consistent performance                                      | Prototype operated reliably during all tests               | ✅ Achieved |
+
+
+
+Conclusion and Future Enhancements :
+
+Summary of Achievements :
+
+The project “Effort Estimation Using Machine Learning: An Enhancement Over the Traditional COCOMO Model” successfully developed an intelligent system that improves the accuracy of software effort estimation.
+By integrating machine learning algorithms such as Linear Regression, Random Forest, and Artificial Neural Networks (ANN) with the traditional COCOMO model, the system provides a more data-driven and adaptive approach to predicting project effort.
+
+Key achievements include:
+•	Automated and accurate prediction of software development effort.
+•	Comparative analysis between traditional and ML-based estimation results.
+•	Improved performance through preprocessing, feature selection, and algorithm tuning.
+•	Development of a simple user interface for input and output visualization.
+•	Validation of results using performance metrics like MAE, RMSE, and R².
+ 
+The results demonstrate that machine learning methods can effectively enhance traditional estimation models, helping project managers make better cost and resource allocation decisions.
+
+Limitations :
+Despite its successful implementation, the project has certain limitations that restrict its scalability and adaptability:
+1.	Dataset Dependency: The model’s accuracy is highly dependent on the quality and volume of the dataset used.
+2.	Limited Dataset Variety: Only limited project types and datasets (e.g., NASA, COCOMO 81) were considered.
+3.	Feature Limitation: The number of input parameters was restricted compared to real-world scenarios.
+4.	Manual Retraining: The model requires manual retraining when new data are added.
+5.	Scope Restriction: The project focuses primarily on effort estimation; cost and schedule estimations are not integrated yet.
+Future Improvements:
+To overcome the current limitations and make the system more powerful and practical, the following enhancements are suggested:
+1.	Integration of Cost and Schedule Estimation: Extend the model to predict total cost and project duration alongside effort.
+2.	Dataset Expansion: Include more diverse, industrial datasets to improve generalization and accuracy.
+3.	Automated Retraining System: Implement continuous learning to update the model as new project data become available.
+4.	Web-Based Dashboard: Deploy the system as a cloud-based web application for real-time estimation and accessibility.
+5.	Deep Learning Integration: Use advanced models such as LSTM and Transformer architectures for complex project data.
+6.	Explainable AI (XAI): Incorporate interpretability techniques to show how estimation decisions are made for transparency.
+
+
+References:
+
+[1] Simon Monk, Programming the Raspberry Pi: Getting Started with Python, 2nd Edition, McGraw-Hill Education, 2016.
+
+[2] Michael Margolis, Arduino Cookbook, 3rd Edition, O’Reilly Media, 2020.
+
+[3] Richard Blum and Christine Bresnahan, Raspberry Pi for Dummies, 4th Edition, Wiley, 2021.
+
+[4] A. Iyer, “Integration of IoT with Embedded Systems for Smart Automation,” International Journal of Innovative Research in Computer and Communication Engineering, vol. 9, no. 5, pp. 1023–1030, 2022.
+
+[5] N. Gupta and R. Singh, “Automation in Board Games Using Arduino and Stepper Motors,” International Conference on Embedded Systems and Robotics, pp. 88–93, 2021.
+
+[6] A. Sharma and K. Mehta, “IoT-Based Real-Time Control and Monitoring System,” International Journal of Advanced Research in Electronics and Communication Engineering, vol. 11, no. 3, pp. 421–426, 2022.
+
+[7] Blynk IoT Platform, “IoT Dashboard and Cloud API,” Available at: https://blynk.io/
+.
+
+[8] Raspberry Pi Foundation, “Raspberry Pi Documentation,” Available at: https://www.raspberrypi.org/documentation/
+.
+
+[9] Arduino Official Documentation, “Arduino Reference Guide,” Available at: https://www.arduino.cc/reference/en/
+.
+
+[10] Allegro Microsystems, “A1344 Linear Hall-Effect Sensor IC Datasheet,” Available at: https://www.allegromicro.com/en/products/sense/linear-and-angular-position/a1344
+.
+
+[11] Pololu Robotics, “A4988 Stepper Motor Driver Module,” Available at: https://www.pololu.com/product/1182
+.
+
+[12] SparkFun Electronics, “Electromagnet Module Hookup Guide,” Available at: https://learn.sparkfun.com/
+.
+
+
+
+

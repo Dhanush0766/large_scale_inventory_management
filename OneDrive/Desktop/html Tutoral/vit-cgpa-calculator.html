@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VIT GPA Calculator</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap');
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to right, #ffc1cc, #ffdee9);
+      padding: 20px;
+      margin: 0;
+      position: relative;
+    }
+    .animated-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+    .bubble {
+      position: absolute;
+      bottom: -100px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 182, 193, 0.5);
+      border-radius: 50%;
+      animation: rise 20s infinite ease-in;
+    }
+    .bubble:nth-child(2) { left: 20%; width: 60px; height: 60px; animation-duration: 25s; }
+    .bubble:nth-child(3) { left: 40%; width: 30px; height: 30px; animation-duration: 18s; }
+    .bubble:nth-child(4) { left: 60%; width: 50px; height: 50px; animation-duration: 22s; }
+    .bubble:nth-child(5) { left: 80%; width: 40px; height: 40px; animation-duration: 20s; }
+
+    @keyframes rise {
+      0% { transform: translateY(0); opacity: 0.5; }
+      100% { transform: translateY(-1200px); opacity: 0; }
+    }
+
+    h1 {
+      text-align: center;
+      color: #d63384;
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #fff0f5;
+      position: relative;
+      z-index: 1;
+    }
+
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .container {
+      background: #fff0f5;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+      perspective: 1000px;
+      transform-style: preserve-3d;
+      position: relative;
+      z-index: 1;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+    }
+    select, input[type="number"] {
+      padding: 8px;
+      border-radius: 10px;
+      border: 1px solid #d63384;
+      font-size: 1em;
+      background-color: #ffe3ec;
+    }
+    button {
+      display: inline-block;
+      margin: 10px;
+      padding: 12px 25px;
+      background-color: #d63384;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff69b4;
+    }
+    #result {
+      text-align: center;
+      font-size: 1.5em;
+      color: #d63384;
+      font-weight: bold;
+    }
+    .image-section {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 1;
+    }
+    .image-section img {
+      width: 120px;
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg">
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+    <div class="bubble"></div>
+  </div>
+  <h1 class="scroll-animate">VIT GPA Calculator</h1>
+  <div class="image-section scroll-animate">
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712033.png" alt="Calculator Icon" />
+  </div>
+  <div class="container scroll-animate">
+    <table id="subjectTable">
+      <tr>
+        <th>Subject</th>
+        <th>Grade</th>
+        <th>Credits</th>
+      </tr>
+      <tr>
+        <td>1</td>
+        <td>
+          <select>
+            <option value="10">S</option>
+            <option value="9">A</option>
+            <option value="8">B</option>
+            <option value="7">C</option>
+            <option value="6">D</option>
+            <option value="5">E</option>
+            <option value="0">F/N</option>
+          </select>
+        </td>
+        <td><input type="number" min="1" value="3" /></td>
+      </tr>
+    </table>
+    <button onclick="addRow()">Add Subject</button>
+    <button onclick="calculateCGPA()">Calculate GPA</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function addRow() {
+      const table = document.getElementById("subjectTable");
+      const rowCount = table.rows.length;
+      const row = table.insertRow();
+      row.innerHTML = `
+        <td>${rowCount}</td>
+        <td>
+          <select>
+            <option value="10">S</option>
+            <option value="9">A</option>
+            <option value="8">B</option>
+            <option value="7">C</option>
+            <option value="6">D</option>
+            <option value="5">E</option>
+            <option value="0">F/N</option>
+          </select>
+        </td>
+        <td><input type="number" min="1" value="3" /></td>
+      `;
+    }
+
+    function calculateCGPA() {
+      const table = document.getElementById("subjectTable");
+      let totalPoints = 0;
+      let totalCredits = 0;
+
+      for (let i = 1; i < table.rows.length; i++) {
+        const grade = parseFloat(table.rows[i].cells[1].querySelector("select").value);
+        const credits = parseFloat(table.rows[i].cells[2].querySelector("input").value);
+
+        totalPoints += grade * credits;
+        totalCredits += credits;
+      }
+
+      const cgpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : 0;
+      document.getElementById("result").innerText = `Your CGPA is: ${cgpa}`;
+    }
+
+    // Scroll animation observer
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    document.querySelectorAll('.scroll-animate').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
+
