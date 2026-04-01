@@ -50,7 +50,7 @@ const AdminDashboard = () => {
     <div className="dashboard">
       <div className="stats-grid">
         {statCards.map((card, index) => (
-          <div key={index} className={`stat-card stat-${card.color}`}>
+          <div key={index} className={`stat-card stat-${card.color}`} style={{ "--animation-order": index }}>
             <div className="stat-icon">{card.icon}</div>
             <div className="stat-info">
               <h3>{card.value}</h3>
@@ -61,7 +61,7 @@ const AdminDashboard = () => {
       </div>
 
       <div className="charts-grid">
-        <div className="chart-card">
+        <div className="chart-card" style={{ "--animation-order": 2 }}>
           <h3>Products by Category</h3>
           <ResponsiveContainer width="100%" height={300}>
             <PieChart>
@@ -85,7 +85,7 @@ const AdminDashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="chart-card">
+        <div className="chart-card" style={{ "--animation-order": 3 }}>
           <h3>Price Distribution</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={charts?.priceData || []}>
@@ -98,7 +98,7 @@ const AdminDashboard = () => {
           </ResponsiveContainer>
         </div>
 
-        <div className="chart-card full-width">
+        <div className="chart-card full-width" style={{ "--animation-order": 4 }}>
           <h3>Inventory Levels (Top 10)</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={charts?.inventoryLevels || []}>
@@ -115,7 +115,7 @@ const AdminDashboard = () => {
       </div>
 
       {lowStock.length > 0 && (
-        <div className="table-card">
+        <div className="table-card" style={{ "--animation-order": 5 }}>
           <h3><FiAlertTriangle className="text-warning" /> Low Stock Alerts</h3>
           <div className="table-responsive">
             <table>
@@ -130,8 +130,8 @@ const AdminDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {lowStock.map((item) => (
-                  <tr key={item.id}>
+                {lowStock.map((item, index) => (
+                  <tr key={item.id} style={{ "--animation-order": index }}>
                     <td className="font-medium">{item.name}</td>
                     <td><code>{item.sku}</code></td>
                     <td>{item.category}</td>

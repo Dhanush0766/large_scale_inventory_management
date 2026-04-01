@@ -56,11 +56,12 @@ const Sidebar = ({ isOpen, onClose }) => {
           </div>
         </div>
         <nav className="sidebar-nav">
-          {links.map((link) => (
+          {links.map((link, index) => (
             <NavLink
               key={link.to}
               to={link.to}
-              className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}
+              className={({ isActive }) => `nav-link animate-cascade ${isActive ? 'active' : ''}`}
+              style={{ "--animation-order": index }}
               onClick={onClose}
             >
               {link.icon}

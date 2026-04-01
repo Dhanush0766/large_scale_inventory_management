@@ -8,11 +8,14 @@
 /* ---- CSS Variables ---- */
 :root {
   --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-tertiary: #334155;
-  --bg-card: #1e293b;
-  --bg-card-hover: #263347;
-  --bg-input: #0f172a;
+  --bg-secondary: rgba(30, 41, 59, 0.65);
+  --bg-tertiary: rgba(51, 65, 85, 0.6);
+  --bg-card: rgba(30, 41, 59, 0.55);
+  --bg-card-hover: rgba(38, 51, 71, 0.75);
+  --bg-input: rgba(15, 23, 42, 0.6);
+
+  --glass-blur: blur(16px);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.05);
 
   --text-primary: #f1f5f9;
   --text-secondary: #94a3b8;
@@ -31,8 +34,8 @@
   --info: #3b82f6;
   --info-bg: rgba(59, 130, 246, 0.15);
 
-  --border: #334155;
-  --border-light: #475569;
+  --border: rgba(51, 65, 85, 0.5);
+  --border-light: rgba(71, 85, 105, 0.5);
 
   --sidebar-width: 260px;
   --header-height: 64px;
@@ -59,11 +62,21 @@ html { font-size: 16px; scroll-behavior: smooth; }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  background: var(--bg-primary);
+  background: linear-gradient(-45deg, #020617, #0f172a, #1e1b4b, #2e1065);
+  background-size: 400% 400%;
+  animation: bgGradient 20s ease infinite;
   color: var(--text-primary);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  position: relative;
+}
+
+@keyframes bgGradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 a { text-decoration: none; color: var(--accent); }
@@ -295,7 +308,8 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
   top: 0;
   left: 0;
   background: var(--bg-secondary);
-  border-right: 1px solid var(--border);
+  backdrop-filter: var(--glass-blur);
+  border-right: var(--glass-border);
   display: flex;
   flex-direction: column;
   z-index: 100;
@@ -442,7 +456,8 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
 .app-header {
   height: var(--header-height);
   background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border);
+  backdrop-filter: var(--glass-blur);
+  border-bottom: var(--glass-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -450,7 +465,6 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
   position: sticky;
   top: 0;
   z-index: 50;
-  backdrop-filter: blur(10px);
 }
 
 .header-left {
@@ -506,11 +520,21 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
   padding: 1.5rem;
 }
 
-.page-container { animation: fadeIn 0.3s ease; }
+.page-container { animation: fadeIn 0.4s ease; }
 
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+@keyframes cascadeSlideUp {
+  from { opacity: 0; transform: translateY(30px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.animate-cascade {
+  animation: cascadeSlideUp 0.6s ease both;
+  animation-delay: calc(var(--animation-order, 0) * 0.1s + 0.1s);
 }
 
 /* ============================================
@@ -525,13 +549,16 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
 
 .stat-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius);
   padding: 1.25rem;
   display: flex;
   align-items: center;
   gap: 1rem;
   transition: var(--transition);
+  animation: cascadeSlideUp 0.6s ease both;
+  animation-delay: calc(var(--animation-order, 0) * 0.1s);
 }
 
 .stat-card:hover {
@@ -579,9 +606,12 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
 
 .chart-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius);
   padding: 1.5rem;
+  animation: cascadeSlideUp 0.6s ease both;
+  animation-delay: calc(var(--animation-order, 0) * 0.1s);
 }
 
 .chart-card h3 {
@@ -600,10 +630,13 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
    ============================================ */
 .table-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
   border-radius: var(--radius);
   padding: 1.5rem;
   margin-bottom: 1rem;
+  animation: cascadeSlideUp 0.6s ease both;
+  animation-delay: calc(var(--animation-order, 0) * 0.1s);
 }
 
 .table-card h3 {
@@ -645,8 +678,15 @@ tbody td {
   vertical-align: middle;
 }
 
-tbody tr { transition: var(--transition); }
-tbody tr:hover { background: rgba(99, 102, 241, 0.05); }
+tbody tr { 
+  transition: var(--transition);
+  animation: cascadeSlideUp 0.5s ease both;
+  animation-delay: calc(var(--animation-order, 0) * 0.05s);
+}
+tbody tr:hover { 
+  background: rgba(99, 102, 241, 0.1); 
+  transform: translateX(4px);
+}
 tbody tr:last-child td { border-bottom: none; }
 
 .product-name {
@@ -692,6 +732,10 @@ tbody tr:last-child td { border-bottom: none; }
   transition: var(--transition);
   font-family: inherit;
   white-space: nowrap;
+}
+
+.btn:active {
+  transform: scale(0.96);
 }
 
 .btn-primary {

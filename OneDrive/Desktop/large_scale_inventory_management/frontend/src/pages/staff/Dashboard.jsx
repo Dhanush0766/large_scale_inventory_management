@@ -42,7 +42,7 @@ const StaffDashboard = () => {
     <div className="dashboard">
       <div className="stats-grid">
         {statCards.map((card, index) => (
-          <div key={index} className={`stat-card stat-${card.color}`}>
+          <div key={index} className={`stat-card stat-${card.color}`} style={{ "--animation-order": index }}>
             <div className="stat-icon">{card.icon}</div>
             <div className="stat-info">
               <h3>{card.value}</h3>
@@ -53,7 +53,7 @@ const StaffDashboard = () => {
       </div>
 
       {lowStock.length > 0 && (
-        <div className="table-card">
+        <div className="table-card" style={{ "--animation-order": 2 }}>
           <h3><FiAlertTriangle className="text-warning" /> Low Stock Alerts</h3>
           <div className="table-responsive">
             <table>
@@ -68,8 +68,8 @@ const StaffDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {lowStock.map((item) => (
-                  <tr key={item.id}>
+                {lowStock.map((item, index) => (
+                  <tr key={item.id} style={{ "--animation-order": index }}>
                     <td className="font-medium">{item.name}</td>
                     <td><code>{item.sku}</code></td>
                     <td>{item.category}</td>
