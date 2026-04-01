@@ -1,0 +1,72 @@
+﻿node : node:internal/modul
+es/cjs/loader:1404
+At line:1 char:1
++ node app.js 2>&1 | 
+Out-File error.txt 
+-Encoding utf8
++ ~~~~~~~~~~~~~~~~
+    + CategoryInfo        
+      : NotSpecified: (n  
+  ode:internal/modules/   
+ cjs/loader:1404:Strin    
+g) [], RemoteExceptio    n
+    + FullyQualifiedError 
+   Id : NativeCommandErr  
+  or
+ 
+  throw err;
+  ^
+
+Error: Cannot find module 
+'./routes/authRoutes'
+Require stack:
+- C:\Users\dhanu\OneDrive\
+Desktop\large_scale_invent
+ory_management\backend\app
+.js
+    at 
+Function._resolveFilename 
+(node:internal/modules/cjs
+/loader:1401:15)
+    at defaultResolveImpl 
+(node:internal/modules/cjs
+/loader:1057:19)
+    at 
+resolveForCJSWithHooks (no
+de:internal/modules/cjs/lo
+ader:1062:22)
+    at Function._load (nod
+e:internal/modules/cjs/loa
+der:1211:37)
+    at 
+TracingChannel.traceSync (
+node:diagnostics_channel:3
+22:14)
+    at wrapModuleLoad (nod
+e:internal/modules/cjs/loa
+der:235:24)
+    at Module.require (nod
+e:internal/modules/cjs/loa
+der:1487:12)
+    at require (node:inter
+nal/modules/helpers:135:16
+)
+    at Object.<anonymous> 
+(C:\Users\dhanu\OneDrive\D
+esktop\large_scale_invento
+ry_management\backend\app.
+js:6:20)
+    at Module._compile (no
+de:internal/modules/cjs/lo
+ader:1730:14) {
+  code: 
+'MODULE_NOT_FOUND',
+  requireStack: [
+    'C:\\Users\\dhanu\\One
+Drive\\Desktop\\large_scal
+e_inventory_management\\ba
+ckend\\app.js'
+  ]
+}
+
+Node.js v22.15.1

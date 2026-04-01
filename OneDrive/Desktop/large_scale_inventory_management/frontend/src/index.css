@@ -96,7 +96,7 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
+  background: transparent;
   position: relative;
   overflow: hidden;
 }
@@ -259,8 +259,13 @@ code { background: var(--bg-tertiary); padding: 2px 6px; border-radius: 4px; fon
 }
 
 .login-btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.login-btn:active {
+  transform: scale(0.96);
 }
 
 .login-btn:disabled {
