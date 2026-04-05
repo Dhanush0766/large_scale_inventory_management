@@ -1,0 +1,10 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Run App",
+			"type": "shell",
+			"command": "java -cp target/classes com.studentgrades.App"
+		}
+	]
+}
