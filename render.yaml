@@ -32,12 +32,12 @@ services:
     name: inventory-frontend
     env: static
     rootDir: frontend
-    # Here we dynamically construct VITE_API_URL at build time using the backend's URL.
-    buildCommand: VITE_API_URL="${BACKEND_URL}/api" npm install && npm run build
+    # Here we dynamically construct VITE_API_URL at build time using the backend's host.
+    buildCommand: VITE_API_URL="https://${BACKEND_HOST}/api" npm install && npm run build
     staticPublishPath: dist
     envVars:
-      - key: BACKEND_URL
+      - key: BACKEND_HOST
         fromService:
           type: web
           name: inventory-backend
-          property: url
+          property: host
