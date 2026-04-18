@@ -1,0 +1,43 @@
+services:
+  # -------------------------
+  # BACKEND - EXPRESS API
+  # -------------------------
+  - type: web
+    name: inventory-backend
+    env: node
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: JWT_SECRET
+        generateValue: true
+      # Database connection variables (To be populated from Railway MySQL)
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_NAME
+        sync: false
+
+  # -------------------------
+  # FRONTEND - REACT (VITE)
+  # -------------------------
+  - type: web
+    name: inventory-frontend
+    env: static
+    rootDir: frontend
+    # Here we dynamically construct VITE_API_URL at build time using the backend's URL.
+    buildCommand: VITE_API_URL="${BACKEND_URL}/api" npm install && npm run build
+    staticPublishPath: dist
+    envVars:
+      - key: BACKEND_URL
+        fromService:
+          type: web
+          name: inventory-backend
+          property: url
