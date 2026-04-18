@@ -4,6 +4,7 @@ services:
   # -------------------------
   - type: web
     name: inventory-backend
+    plan: free
     env: node
     rootDir: backend
     buildCommand: npm install
